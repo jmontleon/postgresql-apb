@@ -1,4 +1,10 @@
 ################################################################################
+# Dependencies
+################################################################################
+_d: &_d
+  - 'registry.access.redhat.com/rhscl/postgresql-94-rhel7'
+  - 'registry.access.redhat.com/rhscl/postgresql-95-rhel7'
+################################################################################
 # Shared Parameters
 ################################################################################
 _p: &_p
@@ -18,9 +24,9 @@ _p: &_p
     description: A random alphanumeric string if left blank
     title: PostgreSQL Password
     display_type: password
-  - name: postgresql_version
-    default: '9.5'
-    enum: ['9.5', '9.4']
+  - name: image
+    default: 'registry.access.redhat.com/rhscl/postgresql-95-rhel7'
+    enum: *_d
     type: enum
     title: PostgreSQL Version
     required: true
@@ -37,9 +43,7 @@ tags:
 metadata:
   documentationUrl: https://www.postgresql.org/docs/
   longDescription: An apb that deploys postgresql 9.4 or 9.5.
-  dependencies:
-    - 'registry.access.redhat.com/rhscl/postgresql-94-rhel7'
-    - 'registry.access.redhat.com/rhscl/postgresql-95-rhel7'
+  dependencies: *_d
   displayName: PostgreSQL (APB)
   console.openshift.io/iconClass: icon-postgresql
   providerDisplayName: "Red Hat, Inc."
